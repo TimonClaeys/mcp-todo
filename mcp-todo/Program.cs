@@ -1,4 +1,5 @@
 ﻿using mcp_todo.Data;
+using mcp_todo.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ builder.Services.AddMcpServer()
     .WithToolsFromAssembly();
 
 builder.Services.AddDbContext<TodoContext>();
+builder.Services.AddScoped<TodoTools>();
 
 builder.Logging.AddConsole(options =>
 {
@@ -18,14 +20,4 @@ builder.Logging.AddConsole(options =>
 
 
 var app = builder.Build();
-
-var todoContext = app.Services.GetService<TodoContext>();
-
-if (todoContext == null)
-{
-    Console.Error.WriteLine("Failed to initialize TodoContext");
-}
-
-todoContext?.Database.EnsureCreated();
-
 await app.RunAsync();

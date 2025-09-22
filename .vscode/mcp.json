@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "mcp-todo": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["run", "--project", "./mcp-todo"]
+    }
+  },
+  "inputs": []
+}

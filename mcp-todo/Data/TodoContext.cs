@@ -8,5 +8,8 @@ public class TodoContext : DbContext
     public DbSet<TaskItem> Tasks => Set<TaskItem>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=tasks.db");
+    {
+        var dbPath = Path.Combine(AppContext.BaseDirectory, "tasks.db");
+        optionsBuilder.UseSqlite($"Data Source={dbPath}");
+    }
 }
